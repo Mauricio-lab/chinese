@@ -72,11 +72,6 @@ pyOpenSSL==19.0.0
 pyrsistent==0.15.5
 pyserial==3.4
 PySocks==1.7.1
-python-debian===0.1.36ubuntu1
-python-dotenv==1.0.0
-python-mimeparse==1.6.0
-python-subunit==1.4.0
-PyYAML==5.3.1
 regex==2023.3.23
 requests==2.22.0
 requests-unixsocket==0.2.0
