@@ -8,6 +8,7 @@ import re
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
@@ -22,12 +23,15 @@ import googletrans
 
 app = Flask(__name__)
 
+service = Service(ChromeDriverManager().install())
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--force-dark-mode')
+options.add_argument('--start-maximized')
 chrome_options = webdriver.ChromeOptions()
-driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
 driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 #time.sleep(1)
@@ -183,9 +187,9 @@ def process(ticker):
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
-    i=2
-    if regex.search(r'\p{Han}', text_link):
-        i=1
+    i=1
+    #if regex.search(r'\p{Han}', text_link):
+    #    i=1
     
     if i==1:
         KIN2=[]
