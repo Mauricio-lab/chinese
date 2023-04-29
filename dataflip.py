@@ -4,7 +4,7 @@ import nltk
 import nltk.sentiment.util
 from nltk.corpus import stopwords
 import re
-import regex
+#import regex
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
