@@ -1,4 +1,4 @@
-#!/home/m/flask/first-flask-app/env/bin/python
+#!/home/m/flask/data_chinese/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
