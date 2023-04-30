@@ -14,7 +14,7 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   #wget -P ./ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   #dpkg -x ./google-chrome-stable_current_amd64.deb $STORAGE_DIR/chrome
   unzip chromedriver_linux64.zip
-  ./chromedriver
+  #./chromedriver
   cd opt
   cd google
   cd chrome  
