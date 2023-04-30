@@ -15,7 +15,9 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   cd opt
   cd google
   cd chrome  
-  ls
+  cd google-chrome
+  ls -la
+  cd ..
   cd ..
   cd ..
   cd ..
