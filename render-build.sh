@@ -15,13 +15,13 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   #dpkg -x ./google-chrome-stable_current_amd64.deb $STORAGE_DIR/chrome
   unzip chromedriver_linux64.zip
   #./chromedriver
-  cd opt
-  cd google
-  cd chrome  
-  ls -la
-  cd ..
-  cd ..
-  cd ..
+  #cd opt
+  #cd google
+  #cd chrome  
+  #ls -la
+  #cd ..
+  #cd ..
+  #cd ..
 
   rm ./google-chrome-stable_current_amd64.deb
   cd $HOME/project/src # Make sure we return to where we were
