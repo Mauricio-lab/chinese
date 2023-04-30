@@ -8,8 +8,8 @@ echo "...Downloading Chrome"
 #mkdir -p $STORAGE_DIR/chrome 
 #sudo cd $STORAGE_DIR/chrome 
 apt-get install -y unzip openjdk-8-jre-headless xvfb libxi6 libgconf-2-4
-curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
-echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+#curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
+#echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 apt-get -y install google-chrome-stable
 wget -N https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip -P
 unzip ~/chromedriver_linux64.zip -d
