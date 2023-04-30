@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # exit on error
-sudo killall apt apt-get
+killall apt apt-get
 set -o errexit STORAGE_DIR=/opt/render/project/.render 
 #if [[ ! -d $STORAGE_DIR/ ]]; then 
 echo "...Downloading Chrome" 
