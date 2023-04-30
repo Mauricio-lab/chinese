@@ -14,9 +14,9 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   dpkg -x ./google-chrome-stable_current_amd64.deb $STORAGE_DIR/chrome
   cd opt
   cd google
-
+  cd chrome  
   ls
-  
+  cd ..
   cd ..
   cd ..
 
