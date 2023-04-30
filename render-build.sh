@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # exit on error
-apt-get -y install aptitude
-aptitude install psmisc
+apt-get -y install psmisc
 killall apt apt-get
 set -o errexit STORAGE_DIR=/opt/render/project/.render 
 #if [[ ! -d $STORAGE_DIR/ ]]; then 
