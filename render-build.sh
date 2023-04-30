@@ -2,7 +2,7 @@
 # exit on error
 apt-get -y install psmisc
 killall apt apt-get
-set -o errexit STORAGE_DIR=/opt/render/project/.render 
+#set -o errexit STORAGE_DIR=/opt/render/project/.render 
 #if [[ ! -d $STORAGE_DIR/ ]]; then 
 echo "...Downloading Chrome" 
 #mkdir -p $STORAGE_DIR/chrome 
