@@ -96,13 +96,28 @@ def prevedi_selenium(tekst):
         
     #start_time1 = time.time()
     #actionChains = ActionChains(driver)
-    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    i=0
+    while i<1:
+        try:
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+            i=2
+        except:
+            pass
+    #elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    
     actionChains.double_click(elem).perform()
     elem.send_keys(Keys.CONTROL, 'a')
     elem.send_keys(Keys.BACKSPACE)
     #INPUT=input(':')
     for sentence in tekst:
-        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+#        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+        i=0
+        while i<1:
+            try:
+                elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+                i=2
+            except:
+                pass
         actionChains.double_click(elem).perform()
         elem.send_keys(Keys.CONTROL, 'a')
         elem.send_keys(Keys.BACKSPACE)
