@@ -97,15 +97,26 @@ def prevedi_selenium(tekst):
     #start_time1 = time.time()
     #actionChains = ActionChains(driver)
     elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-    actionChains.double_click(elem).perform()
+    h=0
+    while h<1:
+        try:
+            actionChains.double_click(elem).perform()
+            h=2
+        except:
+            pass    
     elem.send_keys(Keys.CONTROL, 'a')
     elem.send_keys(Keys.BACKSPACE)
     time.sleep(0.2)
     #INPUT=input(':')
     for sentence in tekst:
         elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-        time.sleep(0.2)
-        actionChains.double_click(elem).perform()
+        h=0
+        while h<1:
+            try:
+                actionChains.double_click(elem).perform()
+                h=2
+            except:
+                pass    
         elem.send_keys(Keys.CONTROL, 'a')
         elem.send_keys(Keys.BACKSPACE)
         time.sleep(0.2)
@@ -220,7 +231,7 @@ def process(ticker):
     #    print(u)
     #nltk_sentences = nltk.sent_tokenize(ticker)
     #print(nltk_sentences)
-    
+    print(KIN2)
     nltk_sentences_hr = prevedi_selenium(KIN2)
     #print(nltk_sentences_hr)
     #print(HR.keys())
