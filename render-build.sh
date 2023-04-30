@@ -23,7 +23,7 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   #cd ..
   #cd ..
 
-  rm ./google-chrome-stable_current_amd64.deb
+  #rm ./google-chrome-stable_current_amd64.deb
   cd $HOME/project/src # Make sure we return to where we were
 #eee
 else
