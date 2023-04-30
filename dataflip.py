@@ -32,7 +32,9 @@ options.add_argument('--force-dark-mode')
 options.add_argument('--start-maximized')
 chrome_options = webdriver.ChromeOptions()
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
-driver = webdriver.Chrome(executable_path="/opt/render/project/.render/chrome/",options=options,service=service)
+#driver = webdriver.Chrome(executable_path="/opt/render/project/.render/chrome/",options=options,service=service)
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service,options=options)
 
 
 driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
