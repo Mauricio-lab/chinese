@@ -31,9 +31,7 @@ options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--force-dark-mode')
 options.add_argument('--start-maximized')
 chrome_options = webdriver.ChromeOptions()
-#driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
-chrome_driver_binary = "/opt/render/.local/share/pyppeteer/local-chromium/588429/chrome-linux/chrome"
-driver = webdriver.Chrome(chrome_driver_binary,options=options,service=service)
+driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
 
 driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
