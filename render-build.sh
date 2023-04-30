@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export PATH=$PATH:/opt/render/.local/share/pyppeteer/local-chromium/588429
-
+#/opt/render/.local/share/pyppeteer/local-chromium/588429/chrome-linux/chrome
 
 # exit on error
 #apt-get -y install psmisc
