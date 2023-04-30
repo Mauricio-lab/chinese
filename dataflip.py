@@ -24,22 +24,18 @@ import googletrans
 
 app = Flask(__name__)
 
-service = Service(ChromeDriverManager().install())
+#service = Service(ChromeDriverManager().install())
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--force-dark-mode')
 options.add_argument('--start-maximized')
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options = webdriver.ChromeOptions()
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-#chrome_options = webdriver.ChromeOptions()
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
 #driver = webdriver.Chrome(executable_path="/opt/render/project/.render/chrome/",options=options,service=service)
-#service = Service(ChromeDriverManager().install())
-#driver = webdriver.Chrome(service=service,options=options)
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service,options=options)
 
 
 driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
