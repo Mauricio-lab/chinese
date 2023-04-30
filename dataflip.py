@@ -108,43 +108,44 @@ def prevedi_selenium(tekst):
     elem.send_keys(Keys.BACKSPACE)
     time.sleep(0.2)
     #INPUT=input(':')
-    for sentence in tekst:
-        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-        h=0
-        while h<1:
-            try:
-                actionChains.double_click(elem).perform()
-                h=2
-            except:
-                pass    
-        elem.send_keys(Keys.CONTROL, 'a')
-        elem.send_keys(Keys.BACKSPACE)
-        time.sleep(0.2)
+    #for sentence in tekst:
+    #    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    #    h=0
+    #    while h<1:
+    #        try:
+    #            actionChains.double_click(elem).perform()
+    #            h=2
+    #        except:
+    #            pass    
+    #    elem.send_keys(Keys.CONTROL, 'a')
+    #    elem.send_keys(Keys.BACKSPACE)
+    #    time.sleep(0.2)
+    #    try:
+    #        #print('=======================================================')    
+    sentence=tekst
+    print(sentence)
+    elem.send_keys(sentence)
+    #        PRIJEVOD=''
+    i=0
+    while i<1:
         try:
-            #print('=======================================================')    
-            print(sentence)
-            elem.send_keys(sentence)
-            PRIJEVOD=''
-            i=0
-            while i<1:
-                try:
-                    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
-                    i=2
-                except:
-                    pass
-            try:
-                elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
-                #time.sleep(1)
-                PRIJEVOD=elem.text
-                #print(PRIJEVOD)
-                HR[PRIJEVOD]=str(sentence)
-                LOCAL_LIST.append(PRIJEVOD)
-            except:
-                #print('Nista')
-                pass
-            #print('=======================================================')    
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+            i=2
         except:
             pass
+    try:
+        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
+                #time.sleep(1)
+        PRIJEVOD=elem.text
+                #print(PRIJEVOD)
+   #             HR[PRIJEVOD]=str(sentence)
+    #            LOCAL_LIST.append(PRIJEVOD)
+    except:
+                #print('Nista')
+        pass
+            #print('=======================================================')    
+    #    except:
+    #        pass
         #print(sentence)
         #print(prijevod.text)
         #print('__________')
@@ -152,7 +153,7 @@ def prevedi_selenium(tekst):
     #print("--- %s seconds ---" % (time.time() - start_time1))
     #time.sleep(20)
     #print(LOCAL_LIST)
-    return LOCAL_LIST
+    return PRIJEVOD # LOCAL_LIST
 
 
 nltk.download('punkt')
@@ -189,37 +190,37 @@ def process(ticker):
     #https:||www.bangkokpost.com|thailand|general|2553516|gun-that-killed-net-idol-belonged-to-boyfriends-father
     #   https:||china.chinadaily.com.cn|a|202304|28|WS644b747da310537989372357.html
     # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
-    url=ticker.replace('|','/')
+    #url=ticker.replace('|','/')
     #print('____________________________________________')
     #print('____________________________________________')
     #print(url)
     #print('____________________________________________')
     #print('____________________________________________')
-    html_content = requests.get(url).text
-    soup = BeautifulSoup(html_content, "html.parser")
-    text_link=''
-    els = soup.find_all("p")
-    text_up=''
-    d=0
-    b1=[]
-    for el in els:
-        text_link=text_link+el.text
+    #html_content = requests.get(url).text
+    #soup = BeautifulSoup(html_content, "html.parser")
+    #text_link=''
+    #els = soup.find_all("p")
+    #text_up=''
+    #d=0
+    #b1=[]
+    #for el in els:
+    #    text_link=text_link+el.text
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
-    i=1
+    #i=1
     #if regex.search(r'\p{Han}', text_link):
     #    i=1
     
-    if i==1:
-        KIN2=[]
-        for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
-            print(kineska_recenica)
-            KIN2.append(kineska_recenica)
-            print('------------')
-    if i!=1:
-        KIN2=nltk.sent_tokenize(text_link)
-        print('NIJE KINESKI')
+    #if i==1:
+    #    KIN2=[]
+    ##    for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
+     #       print(kineska_recenica)
+     #       KIN2.append(kineska_recenica)
+     #       print('------------')
+    #if i!=1:
+    #    KIN2=nltk.sent_tokenize(text_link)
+    #    print('NIJE KINESKI')
     #input('/')
     TEXT=[]
     duzina=0
@@ -231,14 +232,14 @@ def process(ticker):
     #    print(u)
     #nltk_sentences = nltk.sent_tokenize(ticker)
     #print(nltk_sentences)
-    print(KIN2)
-    nltk_sentences_hr = prevedi_selenium(KIN2)
+    #print(KIN2)
+    nltk_sentences_hr = prevedi_selenium(ticker)
     #print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
     #print("--- %s seconds ---" % (time.time() - start_time))
     
-    #nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
+    nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
     #print(len(nltk_sentences))
     #print(len(nltk_sentences_hr))
    
@@ -287,7 +288,7 @@ def process(ticker):
     #input('h')
     #TEXT.append('{"language":"'+'%s' % language_used+'"}')
 
-    for loop_over_sentence in nltk_sentences_hr:
+    for loop_over_sentence in nltk_sentences_hr_1:
         #print('████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████')
         #print('*************************************************')
         #print(loop_over_sentence)
@@ -1547,8 +1548,8 @@ def process(ticker):
         #if ljubav!=0: finale=finale+'"ljubav":'+str(ljubav)+', '
         #if obožavanje!=0: finale=finale+'"obožavanje":'+str(obožavanje)+', '
 
-        CLEAN_LINE='{"rečenica":"'+HR[loop_over_sentence].replace('"','').replace("'",'*')+'##'+loop_over_sentence+'##''", '
-
+        #CLEAN_LINE='{"rečenica":"'+HR[loop_over_sentence].replace('"','').replace("'",'*')+'##'+loop_over_sentence+'##''", '
+        CLEAN_LINE='{"rečenica":"'+loop_over_sentence.replace('"','').replace("'",'*')+'", '
     #SURPRISE		ANTICIPATION
         if budnost>zapanjenost:
             CLEAN_LINE=CLEAN_LINE+'"budnost":'+str(abs(budnost-zapanjenost))+', '
@@ -1903,7 +1904,7 @@ def process(ticker):
     #finale_kumulativne=finale_kumulativne[:-2]
     #finale_kumulativne=finale_kumulativne+'}'
 
-    CLEAN_LINE_kumulativne='{"url":"'+url+'", '
+    CLEAN_LINE_kumulativne='{"url":"'+'url'+'", '
 
     #SURPRISE		ANTICIPATION
     if BUDNOST>ZAPANJENOST:
