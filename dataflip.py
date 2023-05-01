@@ -106,7 +106,7 @@ def prevedi_selenium(tekst):
             pass    
     elem.send_keys(Keys.CONTROL, 'a')
     elem.send_keys(Keys.BACKSPACE)
-    time.sleep(0.2)
+    #time.sleep(0.2)
     #INPUT=input(':')
     #for sentence in tekst:
     #    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
@@ -123,9 +123,9 @@ def prevedi_selenium(tekst):
     #    try:
     #        #print('=======================================================')    
     sentence=tekst
-    print(sentence)
+    #print(sentence)
     elem.send_keys(sentence)
-    #        PRIJEVOD=''
+    PRIJEVOD=''
     i=0
     while i<1:
         try:
@@ -190,21 +190,21 @@ def process(ticker):
     #https:||www.bangkokpost.com|thailand|general|2553516|gun-that-killed-net-idol-belonged-to-boyfriends-father
     #   https:||china.chinadaily.com.cn|a|202304|28|WS644b747da310537989372357.html
     # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
-    #url=ticker.replace('|','/')
+    url=ticker.replace('|','/')
     #print('____________________________________________')
     #print('____________________________________________')
     #print(url)
     #print('____________________________________________')
     #print('____________________________________________')
-    #html_content = requests.get(url).text
-    #soup = BeautifulSoup(html_content, "html.parser")
-    #text_link=''
-    #els = soup.find_all("p")
-    #text_up=''
-    #d=0
-    #b1=[]
-    #for el in els:
-    #    text_link=text_link+el.text
+    html_content = requests.get(url).text
+    soup = BeautifulSoup(html_content, "html.parser")
+    text_link=''
+    els = soup.find_all("p")
+    text_up=''
+    d=0
+    b1=[]
+    for el in els:
+        text_link=text_link+el.text
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
@@ -214,10 +214,13 @@ def process(ticker):
     
     #if i==1:
     #    KIN2=[]
-    ##    for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
-     #       print(kineska_recenica)
+    text_link2=''
+    for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
+        print(kineska_recenica+'\n')
      #       KIN2.append(kineska_recenica)
-     #       print('------------')
+        print('------------')
+        text_link2=text_link2+kineska_recenica+'\n'
+    text_link=text_link2
     #if i!=1:
     #    KIN2=nltk.sent_tokenize(text_link)
     #    print('NIJE KINESKI')
@@ -233,8 +236,9 @@ def process(ticker):
     #nltk_sentences = nltk.sent_tokenize(ticker)
     #print(nltk_sentences)
     #print(KIN2)
-    nltk_sentences_hr = prevedi_selenium(ticker)
-    #print(nltk_sentences_hr)
+    print(text_link)
+    nltk_sentences_hr = prevedi_selenium(text_link)
+    print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
     #print("--- %s seconds ---" % (time.time() - start_time))
@@ -1904,7 +1908,7 @@ def process(ticker):
     #finale_kumulativne=finale_kumulativne[:-2]
     #finale_kumulativne=finale_kumulativne+'}'
 
-    CLEAN_LINE_kumulativne='{"url":"'+'url'+'", '
+    CLEAN_LINE_kumulativne='{"url":"'+url+'", '
 
     #SURPRISE		ANTICIPATION
     if BUDNOST>ZAPANJENOST:
@@ -1996,6 +2000,7 @@ def process(ticker):
     process_speed='{"time[s]":'+'%s' % round((time.time() - start_time),4)+"}"
     print(process_speed)
     TEXT.append(process_speed)
+    TEXT.append('{"original_text":\n'+str(text_link)+'}')
     for rezultat in TEXT:
         #print('======================================================')
         UKUPAN_TEXT_ZA_HTML=UKUPAN_TEXT_ZA_HTML+rezultat
