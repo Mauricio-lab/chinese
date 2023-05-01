@@ -200,15 +200,15 @@ def process(ticker):
     #print(url)
     #print('____________________________________________')
     #print('____________________________________________')
-    html_content = requests.get(url).text
-    soup = BeautifulSoup(html_content, "html.parser")
-    text_link=''
-    els = soup.find_all("p")
-    text_up=''
-    d=0
-    b1=[]
-    for el in els:
-        text_link=text_link+el.text
+    #html_content = requests.get(url).text
+    #soup = BeautifulSoup(html_content, "html.parser")
+    text_link=ticker
+    #els = soup.find_all("p")
+    #text_up=''
+    #d=0
+    #b1=[]
+    #for el in els:
+    #    text_link=text_link+el.text
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
@@ -1918,7 +1918,7 @@ def process(ticker):
     #finale_kumulativne=finale_kumulativne[:-2]
     #finale_kumulativne=finale_kumulativne+'}'
 
-    CLEAN_LINE_kumulativne='{"url":"'+url+'", '
+    CLEAN_LINE_kumulativne='{"url":"'+"url"+'", '
 
     #SURPRISE		ANTICIPATION
     if BUDNOST>ZAPANJENOST:
