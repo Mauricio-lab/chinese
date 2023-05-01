@@ -137,7 +137,10 @@ def prevedi_selenium(tekst):
         elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
                 #time.sleep(1)
         PRIJEVOD=elem.text
-                #print(PRIJEVOD)
+        i=3
+        if i==3:
+            return PRIJEVOD
+        print(PRIJEVOD)
    #             HR[PRIJEVOD]=str(sentence)
     #            LOCAL_LIST.append(PRIJEVOD)
     except:
