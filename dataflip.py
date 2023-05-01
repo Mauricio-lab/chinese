@@ -190,6 +190,7 @@ def process(ticker):
     #https:||www.bangkokpost.com|thailand|general|2553516|gun-that-killed-net-idol-belonged-to-boyfriends-father
     #   https:||china.chinadaily.com.cn|a|202304|28|WS644b747da310537989372357.html
     # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
+    #https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html
     url=ticker.replace('|','/')
     #print('____________________________________________')
     #print('____________________________________________')
@@ -208,18 +209,24 @@ def process(ticker):
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
-    #i=1
+    text_link2=''
+    i=1
     #if regex.search(r'\p{Han}', text_link):
     #    i=1
-    
+    if re.search("[\u4e00-\u9FFF]", text_link):
+        print('===============================0')
+        i=2
     #if i==1:
     #    KIN2=[]
-    text_link2=''
-    for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
-        print(kineska_recenica+'\n')
-     #       KIN2.append(kineska_recenica)
-        print('------------')
-        text_link2=text_link2+kineska_recenica+'\n'
+    if i==2:
+        
+        for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
+            print(kineska_recenica+'\n')
+        #       KIN2.append(kineska_recenica)
+            print('------------')
+            text_link2=text_link2+kineska_recenica+'\n'
+    if i==1:
+       pass 
     text_link=text_link2
     #if i!=1:
     #    KIN2=nltk.sent_tokenize(text_link)
