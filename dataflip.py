@@ -39,7 +39,7 @@ driver = webdriver.Chrome("./chromedriver",options=options)
 #driver = webdriver.Chrome(options=options)
 
 
-driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
+driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=en&tl=hr&text=p")
 time.sleep(2)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -97,7 +97,7 @@ print('******************************************************')
 print('******************************************************')
 print('******************************************************')
 print('******************************************************')
-time.sleep(5)
+time.sleep(2)
 
 
 
@@ -121,46 +121,51 @@ def vrati_jezik(sadržaj):
     return str(koji_je)
     
 def prijevod(text):
-    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-    h=0
-    actionChains = ActionChains(driver)
-    while h<1:
-        try:
-            actionChains.double_click(elem).perform()
-            h=2
-        except:
-            pass    
-    elem.send_keys(Keys.CONTROL, 'a')
-    elem.send_keys(Keys.BACKSPACE)
-    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-    h=0
-    while h<1:
-        try:
-            actionChains.double_click(elem).perform()
-            h=2
-        except:
-            pass    
-    #elem.send_keys(Keys.CONTROL, 'a')
-    #elem.send_keys(Keys.BACKSPACE)
-    #time.sleep(0.2)
-    elem.send_keys(text)
+    LL=[]
     PRIJEVOD=''
-    i=0
-    while i<1:
+    for REČ in text:
+        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+        h=0
+        actionChains = ActionChains(driver)
+        while h<1:
+            try:
+                actionChains.double_click(elem).perform()
+                h=2
+            except:
+                pass    
+        elem.send_keys(Keys.CONTROL, 'a')
+        elem.send_keys(Keys.BACKSPACE)
+        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+        h=0
+        while h<1:
+            try:
+                actionChains.double_click(elem).perform()
+                h=2
+            except:
+                pass    
+        #elem.send_keys(Keys.CONTROL, 'a')
+        #elem.send_keys(Keys.BACKSPACE)
+        #time.sleep(0.2)
+        elem.send_keys(REČ)
+        
+        i=0
+        while i<1:
+            try:
+                elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+                i=2
+            except:
+                pass
         try:
-            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
-            i=2
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
+            PRIJEVOD=elem.text
+            LL.append(PRIJEVOD)
+            HR[PRIJEVOD]=str(REČ)
+            #print(PRIJEVOD)
         except:
             pass
-    try:
-        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
-        PRIJEVOD=elem.text
-        #print(PRIJEVOD)
-    except:
-        pass
 
         odrađeno=''
-    return PRIJEVOD
+    return LL
 
 def prevedi(text_sentence):
     prijevod=translator.translate(text_sentence, src='en', dest='hr')
@@ -312,23 +317,26 @@ def process(ticker):
     #if regex.search(r'\p{Han}', text_link):
     #    i=1
     if re.search("[\u4e00-\u9FFF]", text_link):
-        print('===============================0')
+        #print('===============================0')
         i=2
     #if i==1:
-    #    KIN2=[]
+    KIN2=[]
     if i==2:
         
         for kineska_recenica in re.findall(u'[^!?。\.\!\?]+[!?。\.\!\?]?', text_link, flags=re.U):
-            print(kineska_recenica+'\n')
-        #       KIN2.append(kineska_recenica)
-            print('------------')
+            #print(kineska_recenica+'\n')
+            KIN2.append(kineska_recenica)
+            #print('------------')
             text_link2=text_link2+kineska_recenica+'\n'
     if i==1:
+       print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+       KIN2=nltk.sent_tokenize(text_link)
+       print('NIJE KINESKI')
+#      print(text_link)
        pass 
     text_link=text_link2
-    #if i!=1:
-    #    KIN2=nltk.sent_tokenize(text_link)
-    #    print('NIJE KINESKI')
+    if i!=2:
+        pass
     #input('/')
     TEXT=[]
     duzina=0
@@ -340,16 +348,16 @@ def process(ticker):
     #    print(u)
     #nltk_sentences = nltk.sent_tokenize(ticker)
     #print(nltk_sentences)
-    #print(KIN2)
-    print(text_link)
+    print(KIN2)
+    #print(text_link)
     #nltk_sentences_hr = prevedi_selenium(text_link)
-    nltk_sentences_hr = prijevod(text_link)
+    nltk_sentences_hr = prijevod(KIN2)
     print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
     #print("--- %s seconds ---" % (time.time() - start_time))
     
-    nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
+    #nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
     #print(len(nltk_sentences))
     #print(len(nltk_sentences_hr))
    
@@ -398,7 +406,7 @@ def process(ticker):
     #input('h')
     #TEXT.append('{"language":"'+'%s' % language_used+'"}')
 
-    for loop_over_sentence in nltk_sentences_hr_1:
+    for loop_over_sentence in nltk_sentences_hr:
         #print('████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████')
         #print('*************************************************')
         #print(loop_over_sentence)
@@ -1658,8 +1666,8 @@ def process(ticker):
         #if ljubav!=0: finale=finale+'"ljubav":'+str(ljubav)+', '
         #if obožavanje!=0: finale=finale+'"obožavanje":'+str(obožavanje)+', '
 
-        #CLEAN_LINE='{"rečenica":"'+HR[loop_over_sentence].replace('"','').replace("'",'*')+'##'+loop_over_sentence+'##''", '
-        CLEAN_LINE='{"rečenica":"'+loop_over_sentence.replace('"','').replace("'",'*')+'", '
+        CLEAN_LINE='{"rečenica":"'+HR[loop_over_sentence].replace('"','').replace("'",'*')+'##'+loop_over_sentence+'##'+'", '
+        #CLEAN_LINE='{"rečenica":"'+loop_over_sentence.replace('"','').replace("'",'*')+'", '
     #SURPRISE		ANTICIPATION
         if budnost>zapanjenost:
             CLEAN_LINE=CLEAN_LINE+'"budnost":'+str(abs(budnost-zapanjenost))+', '
