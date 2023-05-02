@@ -24,6 +24,7 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   echo "________________________________________________"
   cd $HOME/project/src # Make sure we return to where we were
 else
+    echo "FUCK"
 fi
 
 # be sure to add Chromes location to the PATH as part of your Start Command
