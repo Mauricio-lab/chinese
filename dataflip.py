@@ -34,7 +34,7 @@ options.add_argument('--disable-dev-shm-usage')
 chrome_options = webdriver.ChromeOptions()
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
 #driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
-driver = webdriver.Chrome(executable_path="/opt/render/project/.render/chromedriver",options=options)
+driver = webdriver.Chrome("/opt/render/project/.render/chromedriver",options=options)
 #service = Service(ChromeDriverManager().install())
 #driver = webdriver.Chrome(options=options)
 
