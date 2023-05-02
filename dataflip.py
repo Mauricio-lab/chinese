@@ -8,11 +8,11 @@ import re
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
+#from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+#from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import os
 
@@ -97,7 +97,7 @@ print('******************************************************')
 print('******************************************************')
 print('******************************************************')
 print('******************************************************')
-time.sleep(60)
+time.sleep(5)
 
 
 
@@ -120,6 +120,47 @@ def vrati_jezik(sadržaj):
 
     return str(koji_je)
     
+def prijevod(text):
+    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    h=0
+    actionChains = ActionChains(driver)
+    while h<1:
+        try:
+            actionChains.double_click(elem).perform()
+            h=2
+        except:
+            pass    
+    elem.send_keys(Keys.CONTROL, 'a')
+    elem.send_keys(Keys.BACKSPACE)
+    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    h=0
+    while h<1:
+        try:
+            actionChains.double_click(elem).perform()
+            h=2
+        except:
+            pass    
+    #elem.send_keys(Keys.CONTROL, 'a')
+    #elem.send_keys(Keys.BACKSPACE)
+    #time.sleep(0.2)
+    elem.send_keys(text)
+    PRIJEVOD=''
+    i=0
+    while i<1:
+        try:
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+            i=2
+        except:
+            pass
+    try:
+        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
+        PRIJEVOD=elem.text
+        #print(PRIJEVOD)
+    except:
+        pass
+
+        odrađeno=''
+    return PRIJEVOD
 
 def prevedi(text_sentence):
     prijevod=translator.translate(text_sentence, src='en', dest='hr')
@@ -301,7 +342,8 @@ def process(ticker):
     #print(nltk_sentences)
     #print(KIN2)
     print(text_link)
-    nltk_sentences_hr = prevedi_selenium(text_link)
+    #nltk_sentences_hr = prevedi_selenium(text_link)
+    nltk_sentences_hr = prijevod(text_link)
     print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
