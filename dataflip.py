@@ -355,7 +355,7 @@ def process(ticker):
     print(KIN2)
     #print(text_link)
     #nltk_sentences_hr = prevedi_selenium(text_link)
-    nltk_sentences_hr = prijevod(KIN2)
+    nltk_sentences_hr = prevedi(text_link)
     print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
