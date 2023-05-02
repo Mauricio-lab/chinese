@@ -4,9 +4,6 @@ import nltk
 import nltk.sentiment.util
 from nltk.corpus import stopwords
 import re
-
-import urllib
-import sys
 #import regex
 
 from selenium import webdriver
@@ -24,7 +21,7 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template, request
 from googletrans import Translator
 import googletrans
-from apiclient.discovery import build
+
 
 
 
@@ -59,9 +56,6 @@ actions.send_keys(Keys.TAB)
 actions.send_keys(Keys.ENTER)
 actions.perform()
 time.sleep(1)
-
-
-
 elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
 h=0
 actionChains = ActionChains(driver)
@@ -134,13 +128,25 @@ def prijevod(text):
     LL=[]
     #text=rrr
     PRIJEVOD=''
-    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    i=0
+    while i<1:
+        try:
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+            i=2
+        except:
+            pass
     h=0
     actionChains = ActionChains(driver)
     actionChains.double_click(elem).perform()
     elem.send_keys(Keys.CONTROL, 'a')
     elem.send_keys(Keys.BACKSPACE)
-    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    i=0
+    while i<1:
+        try:
+            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+            i=2
+        except:
+            pass
     actionChains.double_click(elem).perform()
     #elem.send_keys(Keys.CONTROL, 'a')
     #elem.send_keys(Keys.BACKSPACE)
@@ -2105,7 +2111,7 @@ def process(ticker):
     CLEAN_LINE_kumulativne=CLEAN_LINE_kumulativne+'}'
 
 
-    TEXT.append(CLEAN_LINE_kumulativne)
+    #TEXT.append(CLEAN_LINE_kumulativne)
     UKUPAN_TEXT_ZA_HTML=''
     #print(CLEAN_LINE_kumulativne)
     #print('__________________________')
@@ -2113,9 +2119,9 @@ def process(ticker):
     print(process_speed)
     TEXT.append(process_speed)
     TEXT.append('{"original_text":\n'+str(text_link)+'}')
-    for rezultat in TEXT:
+    #for rezultat in TEXT:
         #print('======================================================')
-        UKUPAN_TEXT_ZA_HTML=UKUPAN_TEXT_ZA_HTML+rezultat
+    #    UKUPAN_TEXT_ZA_HTML=UKUPAN_TEXT_ZA_HTML+rezultat
         #print(rezultat)
     print('######################################################')
     #print(UKUPAN_TEXT_ZA_HTML)
