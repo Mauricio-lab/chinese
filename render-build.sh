@@ -6,8 +6,9 @@ STORAGE_DIR=/opt/render/project/.render
 
 if [[ ! -d $STORAGE_DIR/chrome ]]; then
   echo "...Downloading Chrome"
-  #wget https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip
-  #unzip chromedriver_linux64.zip
+  wget https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip
+  #wget https://chromedriver.storage.googleapis.com/index.html?path=113.0.5672.24/
+  unzip chromedriver_linux64.zip
   mkdir -p $STORAGE_DIR/chrome
   cd $STORAGE_DIR/chrome
   wget -P ./ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -17,7 +18,7 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   echo "________________________________________________"
   echo "________________________________________________"
   echo "________________________________________________"
-  #./google-chrome
+  chromedriver --version
   echo "________________________________________________"
   echo "________________________________________________"
   echo "________________________________________________"

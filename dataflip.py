@@ -100,10 +100,6 @@ print('******************************************************')
 time.sleep(2)
 
 
-
-
-
-
 translator = Translator()
 jezici=googletrans.LANGUAGES
 #probaj
