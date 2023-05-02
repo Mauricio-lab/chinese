@@ -29,18 +29,19 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-options.add_argument('--force-dark-mode')
-options.add_argument('--start-maximized')
+#options.add_argument('--force-dark-mode')
+#options.add_argument('--start-maximized')
 chrome_options = webdriver.ChromeOptions()
-#driver = webdriver.Chrome(ChromeDriverManager().install(),options=options,service=service)
+driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
 #driver = webdriver.Chrome(executable_path="/opt/render/project/.render/chrome/",options=options,service=service)
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service,options=options)
+#service = Service(ChromeDriverManager().install())
+#driver = webdriver.Chrome(options=options)
 
 
 driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=zh-CN&tl=hr&text=p")
+time.sleep(2)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-#time.sleep(1)
+
 actions = ActionChains(driver)
 actions.send_keys(Keys.TAB)
 actions.send_keys(Keys.TAB)
@@ -48,8 +49,51 @@ actions.send_keys(Keys.TAB)
 actions.send_keys(Keys.TAB)
 actions.send_keys(Keys.ENTER)
 actions.perform()
-#time.sleep(1)
+time.sleep(1)
+elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+h=0
 actionChains = ActionChains(driver)
+while h<1:
+    try:
+        actionChains.double_click(elem).perform()
+        h=2
+    except:
+        pass    
+elem.send_keys(Keys.CONTROL, 'a')
+elem.send_keys(Keys.BACKSPACE)
+elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+h=0
+while h<1:
+    try:
+        actionChains.double_click(elem).perform()
+        h=2
+    except:
+        pass    
+#elem.send_keys(Keys.CONTROL, 'a')
+#elem.send_keys(Keys.BACKSPACE)
+#time.sleep(0.2)
+elem.send_keys('car is red.')
+PRIJEVOD=''
+i=0
+while i<1:
+    try:
+        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+        i=2
+    except:
+        pass
+try:
+    elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
+    PRIJEVOD=elem.text
+    print(PRIJEVOD)
+except:
+    pass
+input("u")
+
+
+
+
+
+
 translator = Translator()
 jezici=googletrans.LANGUAGES
 #probaj
@@ -95,7 +139,7 @@ def prevedi_selenium(tekst):
     #    print('------------')
         
     #start_time1 = time.time()
-    #actionChains = ActionChains(driver)
+    actionChains = ActionChains(driver)
     elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
     h=0
     while h<1:
@@ -141,8 +185,8 @@ def prevedi_selenium(tekst):
         if i==3:
             return PRIJEVOD
         print(PRIJEVOD)
-   #             HR[PRIJEVOD]=str(sentence)
-    #            LOCAL_LIST.append(PRIJEVOD)
+        #HR[PRIJEVOD]=str(sentence)
+        #LOCAL_LIST.append(PRIJEVOD)
     except:
                 #print('Nista')
         pass
