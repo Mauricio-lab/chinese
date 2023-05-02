@@ -15,7 +15,7 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   #rm ./google-chrome-stable_current_amd64.deb
   cd $HOME/project/src # Make sure we return to where we were
 else
-  echo "...Using Chrome from cache"
+  echo "...Using Chrome from cache________________________"
 fi
 
 # be sure to add Chromes location to the PATH as part of your Start Command
