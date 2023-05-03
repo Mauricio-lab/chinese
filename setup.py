@@ -12,7 +12,7 @@ nltk.download('punkt')
 # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
 #https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html
 #url=ticker.replace('|','/')
-url='https://www.chinadaily.com.cn/a/202305/02/WS6450484ea310b6054fad0ac8.html'
+url='https://www.liberoquotidiano.it/news/spettacoli/35682988/madonna-di-trevignano-veggente-iene-maiale-verita-test-sangue.html'
 print('____________________________________________')
 print(url)
 print('____________________________________________')
@@ -49,7 +49,7 @@ if i==1:
     pass 
 #nltk_riječi = nltk.sent_tokenize(text_link)
 print(KIN2)
-input('OOOO')
+#input('OOOO')
 b1=[]
 #text_link=''
 start_time = time.time()
@@ -57,9 +57,6 @@ for sentence in KIN2:
     print(sentence)
     url='https://svijezici.onrender.com/process/'+sentence
     html_content = requests.get(url).text
-    time.sleep(2)
-    print(html_content)
-    input('zzz')
     soup = BeautifulSoup(html_content, "html.parser")
     text_link=''
     els = soup.find_all("p")

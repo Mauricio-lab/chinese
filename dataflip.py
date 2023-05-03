@@ -423,7 +423,7 @@ def process(ticker):
     count=0
     #input('h')
     
-    TEXT.append('{"language":'+lang1+', ' + '"lang":'+lang2+'}')
+    TEXT.append('{"language":"'+lang1+'", ' + '"lang":"'+lang2+'"}')
 
     for loop_over_sentence in b1: #nltk_sentences_hr_1:
         #print('████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████')
