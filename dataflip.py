@@ -110,9 +110,9 @@ time.sleep(1)
 
 
 
-
-#driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=en&tl=hr&text=p")
 """
+#driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=en&tl=hr&text=p")
+
 translator = Translator()
 jezici=googletrans.LANGUAGES
 print(jezici)
@@ -346,7 +346,7 @@ def process(ticker):
        print('NIJE KINESKI')
 #      print(text_link)
        pass 
-    text_link=text_link2
+    #text_link=text_link2
     if i!=2:
         pass
     #input('/')
@@ -364,8 +364,8 @@ def process(ticker):
     #print(text_link)
     #nltk_sentences_hr = prevedi_selenium(text_link)
     
-    nltk_riječi = nltk.sent_tokenize(text_link)
-    for i in nltk_riječi:
+    #nltk_riječi = nltk.sent_tokenize(text_link)
+    for i in KIN2:
         zz=prevedi(i,lang2)
         b1.append(zz)
     print(b1)
