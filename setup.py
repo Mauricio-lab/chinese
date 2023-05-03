@@ -12,7 +12,7 @@ nltk.download('punkt')
 # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
 #https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html
 #url=ticker.replace('|','/')
-url='https://www.chinadaily.com.cn/a/202305/01/WS644fb676a310b6054fad0a6f.html'
+url='https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html'
 print('____________________________________________')
 print(url)
 print('____________________________________________')

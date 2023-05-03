@@ -302,7 +302,7 @@ def process(ticker):
     #https:||www.chinadaily.com.cn|a|202304|20|WS6440f310a310b6054facec9a.html
     #https:||cn.chinadaily.com.cn|a|202304|26|WS6448d913a310537989371c30.html
     #https:||www.bangkokpost.com|thailand|general|2553516|gun-that-killed-net-idol-belonged-to-boyfriends-father
-    #   https:||china.chinadaily.com.cn|a|202304|28|WS644b747da310537989372357.html
+    #   https://china.chinadaily.com.cn/a/202304/28/WS644b747da310537989372357.html
     # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
     #https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html
     url=ticker.replace('|','/')
@@ -323,6 +323,7 @@ def process(ticker):
     #    if len(text_link)>2500:
     #        b1.append(text_link)
     #        text_link=''
+    lang1,lang2=vrati_jezik(text_link)
     text_link2=''
     i=1
     #if regex.search(r'\p{Han}', text_link):
@@ -345,7 +346,7 @@ def process(ticker):
        print('NIJE KINESKI')
 #      print(text_link)
        pass 
-    #text_link=text_link2
+    text_link=text_link2
     if i!=2:
         pass
     #input('/')
@@ -362,7 +363,7 @@ def process(ticker):
     print(KIN2)
     #print(text_link)
     #nltk_sentences_hr = prevedi_selenium(text_link)
-    lang1,lang2=vrati_jezik(text_link)
+    
     nltk_riječi = nltk.sent_tokenize(text_link)
     for i in nltk_riječi:
         zz=prevedi(i,lang2)
