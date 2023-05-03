@@ -42,9 +42,10 @@ driver = webdriver.Chrome("./chromedriver",options=options)
 #service = Service(ChromeDriverManager().install())
 #driver = webdriver.Chrome(options=options)
 
-
-
-driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=en&tl=hr&text=p")
+"""
+jezik='en'
+url="https://translate.google.com/?sl="+jezik+"&tl=hr&op=translate"
+driver.get(url)
 time.sleep(2)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -108,8 +109,14 @@ print('******************************************************')
 time.sleep(1)
 
 
+
+
+#driver.get("https://translate.google.hr/?hl=hr&tab=wT1#view=home&op=translate&sl=en&tl=hr&text=p")
+"""
 translator = Translator()
 jezici=googletrans.LANGUAGES
+print(jezici)
+#input('d')
 #probaj
 HR={}
 LOCAL_LIST=[]
@@ -119,15 +126,35 @@ def vrati_jezik(sadržaj):
     jezik=translator.detect(sadržaj)
     #gdje=str(jezik.lang).find('lang=')
     #kratica=str(jezik)[gdje+5:gdje+7]
-    
+    rr=jezik.lang.lower()
     koji_je=jezici[str(jezik.lang.lower())]
-
-    return str(koji_je)
+    ttt=str(koji_je)+'='+str(rr)
+    return koji_je,rr
     
 def prijevod(text):
     LL=[]
     #text=rrr
     PRIJEVOD=''
+    t=0
+    while t<1:
+        try:
+            search3 = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/div[1]/div/div/span/button/div[3]")
+            t = 2
+            search3.click()
+        except:
+            pass
+    #i=0
+    #while i<1:
+    #    try:
+    #        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
+    #        i=2
+    #    except:
+    #        pass
+    #h=0
+    #actionChains = ActionChains(driver)
+    #actionChains.double_click(elem).perform()
+    #elem.send_keys(Keys.CONTROL, 'a')
+    #elem.send_keys(Keys.BACKSPACE)
     i=0
     while i<1:
         try:
@@ -135,44 +162,24 @@ def prijevod(text):
             i=2
         except:
             pass
-    h=0
-    actionChains = ActionChains(driver)
-    actionChains.double_click(elem).perform()
-    elem.send_keys(Keys.CONTROL, 'a')
-    elem.send_keys(Keys.BACKSPACE)
-    i=0
-    while i<1:
-        try:
-            elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[1]/span/span/div/textarea")
-            i=2
-        except:
-            pass
-    actionChains.double_click(elem).perform()
+    #actionChains.double_click(elem).perform()
     #elem.send_keys(Keys.CONTROL, 'a')
     #elem.send_keys(Keys.BACKSPACE)
     #time.sleep(0.2)
+    elem.click()
     elem.send_keys(text)
     i=0
     while i<1:
         try:
             elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")    
+            PRIJEVOD=elem.text
             i=2
         except:
             pass
-    try:
-        elem = driver.find_element("xpath","/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[9]/div/div[1]")
-        PRIJEVOD=elem.text
-        #LL.append(PRIJEVOD)
-        #HR[PRIJEVOD]=str(REČ)
-        #print(PRIJEVOD)
-    except:
-        pass
-
-    odrađeno=''
     return PRIJEVOD # LL
 
-def prevedi(text_sentence):
-    prijevod=translator.translate(text_sentence, src='en', dest='hr')
+def prevedi(text_sentence,lang2):
+    prijevod=translator.translate(text_sentence, src=lang2, dest='hr')
     return str(prijevod.text)
 
 def prevedi_2(list_sentences):
@@ -310,7 +317,7 @@ def process(ticker):
     #els = soup.find_all("p")
     #text_up=''
     #d=0
-    #b1=[]
+    b1=[]
     #for el in els:
     #    text_link=text_link+el.text
     #    if len(text_link)>2500:
@@ -355,13 +362,19 @@ def process(ticker):
     print(KIN2)
     #print(text_link)
     #nltk_sentences_hr = prevedi_selenium(text_link)
-    nltk_sentences_hr = prevedi(text_link)
-    print(nltk_sentences_hr)
+    lang1,lang2=vrati_jezik(text_link)
+    nltk_riječi = nltk.sent_tokenize(text_link)
+    for i in nltk_riječi:
+        zz=prevedi(i,lang2)
+        b1.append(zz)
+    print(b1)
+    #nltk_sentences_hr = prevedi(text_link)
+    #print(nltk_sentences_hr)
     #print(HR.keys())
     #input('f')
     #print("--- %s seconds ---" % (time.time() - start_time))
     
-    nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
+    #nltk_sentences_hr_1 = nltk.sent_tokenize(nltk_sentences_hr)
     #print(len(nltk_sentences))
     #print(len(nltk_sentences_hr))
    
@@ -408,9 +421,10 @@ def process(ticker):
     tut=''
     count=0
     #input('h')
-    TEXT.append('{"language":"'+'%s' % vrati_jezik(text_link)+'"}')
+    
+    TEXT.append('{"language":'+lang1+', ' + '"lang":'+lang2+'}')
 
-    for loop_over_sentence in nltk_sentences_hr_1:
+    for loop_over_sentence in b1: #nltk_sentences_hr_1:
         #print('████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████')
         #print('*************************************************')
         #print(loop_over_sentence)
