@@ -2133,7 +2133,7 @@ def process(ticker):
     process_speed='{"time[s]":'+'%s' % round((time.time() - start_time),4)+"}"
     print(process_speed)
     TEXT.append(process_speed)
-    TEXT.append('{"original_text":\n'+str(text_link)+'}')
+    TEXT.append('{"original_text":"'+str(text_link)+'"}')
     #for rezultat in TEXT:
         #print('======================================================')
     #    UKUPAN_TEXT_ZA_HTML=UKUPAN_TEXT_ZA_HTML+rezultat

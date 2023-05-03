@@ -12,7 +12,7 @@ nltk.download('punkt')
 # https:||www.chinadaily.com.cn|a|202304|26|WS6448decfa310b6054facfef4.html
 #https://www.chinadaily.com.cn/a/202304/26/WS64487d85a310b6054facfcf5.html
 #url=ticker.replace('|','/')
-url='https://www.liberoquotidiano.it/news/spettacoli/35682988/madonna-di-trevignano-veggente-iene-maiale-verita-test-sangue.html'
+url='https://www.chinadaily.com.cn/a/202305/03/WS6451f68ca310b6054fad0d3d.html'
 print('____________________________________________')
 print(url)
 print('____________________________________________')
