@@ -366,6 +366,19 @@ def process(ticker):
     
     #nltk_riječi = nltk.sent_tokenize(text_link)
     for i in KIN2:
+        i=i.replace(':','')
+        i=i.replace('"','')
+        i=i.replace("'",'')
+        i=i.replace(';','')
+        i=i.replace(',','')
+        i=i.replace('，','')
+        i=i.replace('.','')
+        i=i.replace('”','')
+        i=i.replace('%','')
+        print(i)
+        #input('I')        
+        #i=i.replace(':','')
+
         zz=prevedi(i,lang2)
         b1.append(zz)
     print(b1)
